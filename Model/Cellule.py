@@ -51,18 +51,37 @@ def construireCellule(contenu: int = 0, visible: bool = False) -> dict:
     }
 
 def getContenuCellule(cell: dict) -> int:
+    """
+    Renvoie le contenu d'une cellule
+
+    :param cell: dictionnaire représentant une cellule
+    :return: int entre 0 et 8 ou const.ID_MINE
+    """
     if not type_cellule(cell):
         raise TypeError("getContenuCellule: Le paramètre n’est pas une cellule.")
 
     return cell["Contenu"]
 
-def isVisibleCellule(cell: dict) -> int:
+def isVisibleCellule(cell: dict) -> bool:
+    """
+    Renvoie un booléen reprérentant la visibilité de la cellule "cell"
+
+    :param cell: dictionnaire représentant une cellule
+    :return: bool
+    """
     if not type_cellule(cell):
         raise TypeError("isVisibleCellule: Le paramètre n’est pas une cellule.")
 
     return cell["Visible"]
 
 def setContenuCellule(cell: dict, contenu: int) -> dict:
+    """
+    Modifie le contenu de la cellule "cell" avec le contenu "contenu" passé en paramètre
+
+    :param cell: dictionnaire représentant une cellule
+    :param contenu: nombre entre 0 et 8 ou const.ID_MINE
+    :return: dictionnaire représentant la cellule mise à jour
+    """
     if not type_cellule(cell):
         raise TypeError("setContenuCellule: Le premier paramètre n’est pas une cellule.")
 
@@ -79,6 +98,13 @@ def setContenuCellule(cell: dict, contenu: int) -> dict:
 
 
 def setVisibleCellule(cell: dict, val: bool) -> dict:
+    """
+    Modifie la visibilité de la cellule "cell" avec la valeur "val" passé en paramètre
+
+    :param cell: dictionnaire représentant une cellule
+    :param val: booléen correspondant à la visibilité et qui  modifie  la  visibilité  de  la  cellule "cell"
+    :return: dictionnaire représentant la cellule mise à jour
+    """
     if not type_cellule(cell):
         raise TypeError("setVisibleCellule: Le premier paramètre n’est pas une cellule")
 
@@ -89,6 +115,12 @@ def setVisibleCellule(cell: dict, val: bool) -> dict:
     return cell
 
 def contientMineCellule(cell: dict) -> bool:
+    """
+    Renvoie si la cellule contient une mine ou non
+
+    :param cell: dictionnaire représentant une cellule
+    :return: booléen spécifiant si la cellule contient une mine ou non
+    """
     if not type_cellule(cell):
         raise TypeError("contientMineCellule: Le paramètre n’est pas une cellule.")
 
