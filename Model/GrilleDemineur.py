@@ -231,6 +231,8 @@ def placerMinesGrilleDemineur(grille: list, nb:int, coord: tuple):
             cell = getCelluleGrilleDemineur(grille, mine)
             setContenuCellule(cell, const.ID_MINE)
 
+    compterMinesVoisinesGrilleDemineur(grille)
+
 
 
 def compterMinesVoisinesGrilleDemineur(grille: list):
