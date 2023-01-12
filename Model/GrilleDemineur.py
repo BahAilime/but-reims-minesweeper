@@ -187,6 +187,13 @@ def contientMineGrilleDemineur(grille: list, coord: tuple) -> bool:
 
 
 def getCoordonneeVoisinsGrilleDemineur(grille: list, coord: tuple) -> list:
+    """
+    Renvoie les voisins de la cellule dont les coordonées "coord" sont passé en paramètre
+
+    :param grille: Grille dans laquelle se trouve celule qui nous interesse
+    :param coord: Coordoées de la cellule dans la grille
+    :return: liste des coordonéesdes des voisins de la cellule
+    """
     if not type_grille_demineur(grille) or not type_coordonnee(coord):
         raise TypeError("getCoordonneeVoisinsGrilleDemineur: un des paramètres n’est pas du bon type")
     elif not isCoordonneeCorrecte(grille, coord):
@@ -203,3 +210,25 @@ def getCoordonneeVoisinsGrilleDemineur(grille: list, coord: tuple) -> list:
         if type_coordonnee(elt) and isCoordonneeCorrecte(grille, elt):
             resultat.append(elt)
     return resultat
+
+
+def placerMinesGrilleDemineur(grille: list, nb:int, coord: tuple):
+    """
+    Place nb mine dans une grille "grille"
+
+    :param grille: Grille dans laquelle on veut placer des mines
+    :param nb: Nombre de mines à placer
+    :param coord: Coordinées de l'emplacement ou il ne peut pas y avoir de mine
+    """
+    if nb > getNbLignesGrilleDemineur(grille) * getNbColonnesGrilleDemineur(grille) - 1 or nb < 0:
+        raise ValueError("placerMinesGrilleDemineur: Nombre de bombes à placer incorrect")
+    elif not isCoordonneeCorrecte(grille, coord):
+        raise IndexError("placerMinesGrilleDemineur: la coordonnée n’est pas dans la grille")
+
+    coord_mines = []
+    while len(coord_mines) != nb:
+        mine = (randint(0, getNbLignesGrilleDemineur(grille)), randint(0, getNbColonnesGrilleDemineur(grille)))
+        if mine != coord and not mine in coord_mines and isCoordonneeCorrecte(grille, mine):
+            coord_mines.append(mine)
+            cell = getCelluleGrilleDemineur(grille, mine)
+            setContenuCellule(cell, const.ID_MINE)
