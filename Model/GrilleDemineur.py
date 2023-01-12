@@ -268,3 +268,13 @@ def getNbMinesGrilleDemineur(grille: list) -> int:
                 mines += 1
 
     return mines
+
+def getAnnotationGrilleDemineur(grille: list, coord: tuple) -> str:
+    """
+    Renvoie l'annotation d'une cellule dans une grille "grille" aux coordonées "coord"
+
+    :param grille: Liste de listes contenant des cellules
+    :param coord: Coordoées de la cellule dans la grille
+    :return: str (annotation)
+    """
+    return getAnnotationCellule(getCelluleGrilleDemineur(grille, coord))
