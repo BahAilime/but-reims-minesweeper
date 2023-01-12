@@ -61,7 +61,7 @@ def getContenuCellule(cell: dict) -> int:
     if not type_cellule(cell):
         raise TypeError("getContenuCellule: Le paramètre n’est pas une cellule.")
 
-    return cell["Contenu"]
+    return cell[const.CONTENU]
 
 def isVisibleCellule(cell: dict) -> bool:
     """
@@ -73,7 +73,7 @@ def isVisibleCellule(cell: dict) -> bool:
     if not type_cellule(cell):
         raise TypeError("isVisibleCellule: Le paramètre n’est pas une cellule.")
 
-    return cell["Visible"]
+    return cell[const.VISIBLE]
 
 def setContenuCellule(cell: dict, contenu: int) -> dict:
     """
@@ -93,7 +93,7 @@ def setContenuCellule(cell: dict, contenu: int) -> dict:
     elif not isContenuCorrect(contenu):
         raise ValueError(f"setContenuCellule: le contenu {contenu} n’est pas correct")
 
-    cell["Contenu"] = contenu
+    cell[const.CONTENU] = contenu
     return cell
 
 
@@ -111,7 +111,7 @@ def setVisibleCellule(cell: dict, val: bool) -> dict:
     elif type(val) != bool:
         raise TypeError(f"setContenuCellule: la valeur du contenu ({val}) n’est pas correcte.")
 
-    cell["Visible"] = val
+    cell[const.VISIBLE] = val
     return cell
 
 def contientMineCellule(cell: dict) -> bool:
@@ -124,7 +124,7 @@ def contientMineCellule(cell: dict) -> bool:
     if not type_cellule(cell):
         raise TypeError("contientMineCellule: Le paramètre n’est pas une cellule.")
 
-    return cell["Contenu"] == const.ID_MINE
+    return cell[const.CONTENU] == const.ID_MINE
 
 
 def isAnnotationCorrecte(annotation: str) -> bool:
@@ -135,3 +135,20 @@ def isAnnotationCorrecte(annotation: str) -> bool:
     :return: bool représentant si l'annotation est valide (True) ou non (False)
     """
     return annotation in (None, const.DOUTE, const.FLAG)
+
+
+def getAnnotationCellule(cell: dict) -> str:
+    """
+    Renvoie l'annotation d'une cellule
+
+    :param cell: dictionnaire représentant une cellule
+    :return: str (annotation)
+    """
+    if not type_cellule(cell):
+        raise TypeError(f"getAnnotationCellule: Le paramètre {cell} n’est pas une cellule.")
+
+    print(cell)
+    if const.ANNOTATION in cell.keys():
+        return cell[const.ANNOTATION]
+    else:
+        return None
