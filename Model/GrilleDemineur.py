@@ -249,3 +249,22 @@ def compterMinesVoisinesGrilleDemineur(grille: list):
                     if getContenuCellule(getCelluleGrilleDemineur(grille, coo)) == const.ID_MINE:
                         nb_mine_voisin += 1
                 setContenuCellule(elt, nb_mine_voisin)
+
+
+def getNbMinesGrilleDemineur(grille: list) -> int:
+    """
+    Renvoie le nombre de mines dans une grille "grille"
+
+    :param grille: Liste de listes contenant des cellules
+    :return: int (nombre de mines)
+    """
+    if not type_grille_demineur(grille):
+        raise ValueError("getNbMinesGrilleDemineur: le paramètre n’est pas une grille")
+
+    mines = 0
+    for ligne in grille:
+        for elt in ligne:
+            if getContenuCellule(elt) == const.ID_MINE:
+                mines += 1
+
+    return mines
