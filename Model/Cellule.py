@@ -31,7 +31,7 @@ def isContenuCorrect(nb: int) -> bool:
         return False
     return nb == const.ID_MINE or (nb >= 0 and nb <= 8)
 
-def construireCellule(contenu: int = 0, visible: bool = False) -> dict:
+def construireCellule(contenu: int = 0, visible: bool = False, annotation: str = None) -> dict:
     """
     Contruit une cellule à partir des deux paramètres
 
@@ -47,7 +47,8 @@ def construireCellule(contenu: int = 0, visible: bool = False) -> dict:
 
     return {
         const.CONTENU: contenu,
-        const.VISIBLE: visible
+        const.VISIBLE: visible,
+        const.ANNOTATION: annotation
     }
 
 def getContenuCellule(cell: dict) -> int:
@@ -124,3 +125,13 @@ def contientMineCellule(cell: dict) -> bool:
         raise TypeError("contientMineCellule: Le paramètre n’est pas une cellule.")
 
     return cell["Contenu"] == const.ID_MINE
+
+
+def isAnnotationCorrecte(annotation: str) -> bool:
+    """
+    Verifie si une annotation est valide ou non
+
+    :param annotation: string de l'annotation souhaitée
+    :return: bool représentant si l'annotation est valide (True) ou non (False)
+    """
+    return annotation in (None, const.DOUTE, const.FLAG)
