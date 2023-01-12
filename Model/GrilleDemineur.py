@@ -107,6 +107,7 @@ def isCoordonneeCorrecte(grille: list, coord: tuple) -> bool:
     :return: booléen représentant l'existance ou non d'une cellule aux coordonées données en paramètre
     """
     if not type_grille_demineur(grille) or not type_coordonnee(coord):
+        print(coord)
         raise TypeError("isCoordonneeCorrecte: un des paramètres n’est pas du bon type")
 
     index_max_grille = (getNbLignesGrilleDemineur(grille)-1, getNbColonnesGrilleDemineur(grille)-1)
@@ -183,3 +184,22 @@ def contientMineGrilleDemineur(grille: list, coord: tuple) -> bool:
     :return: "True" si la cellule contient une mine, sinon "False"
     """
     return getContenuGrilleDemineur(grille, coord) == const.ID_MINE
+
+
+def getCoordonneeVoisinsGrilleDemineur(grille: list, coord: tuple) -> list:
+    if not type_grille_demineur(grille) or not type_coordonnee(coord):
+        raise TypeError("getCoordonneeVoisinsGrilleDemineur: un des paramètres n’est pas du bon type")
+    elif not isCoordonneeCorrecte(grille, coord):
+        raise IndexError("getCoordonneeVoisinsGrilleDemineur: la coordonnée n’est pas dans la grille")
+
+    coords = [
+        (coord[0]-1, coord[1]-1), (coord[0]-1, coord[1]), (coord[0]-1, coord[1]+1),
+        (coord[0], coord[1]-1),                           (coord[0], coord[1]+1),
+        (coord[0]+1, coord[1]-1), (coord[0]+1, coord[1]), (coord[0]+1, coord[1]+1)
+    ]
+
+    resultat = []
+    for elt in coords:
+        if type_coordonnee(elt) and isCoordonneeCorrecte(grille, elt):
+            resultat.append(elt)
+    return resultat
