@@ -131,3 +131,55 @@ def getCelluleGrilleDemineur(grille: list, coord: tuple) -> dict:
         raise IndexError("getCelluleGrilleDemineur: coordonnée non contenue dans la grille")
 
     return grille[coord[0]][coord[1]]
+
+
+def getContenuGrilleDemineur(grille: list, coord: tuple) -> int:
+    """
+    Renvoie le contenu de la cellule située aux coordonées "cord" d'une grille "grille"
+
+    :param grille: Grille dans laquelle se trouve celule que l'on cherche pour extraire le contenu
+    :param coord: Coordoées de la cellule dans la grille
+    :return: contenu de la cellule (entier)
+    """
+    return getCelluleGrilleDemineur(grille, coord)["Contenu"]
+
+def setContenuGrilleDemineur(grille: list, coord: tuple, contenu: int) -> None:
+    """
+    Change le contenu de la cellule se trouvant aux coordonées "coord" de la grille "grille" par le contenu passé en param
+
+    :param grille: Grille dans laquelle se trouve celule qui nous interesse
+    :param coord: Coordoées de la cellule dans la grille
+    :param contenu: Nouveau contenu pour la cellule
+    """
+    setContenuCellule(getCelluleGrilleDemineur(grille, coord), contenu)
+
+def isVisibleGrilleDemineur(grille: list, coord: tuple) -> bool:
+    """
+    Booléen représentant si la cellule est visible ou non
+
+    :param grille: Grille dans laquelle se trouve celule qui nous interesse
+    :param coord: Coordoées de la cellule dans la grille
+    :return:
+    """
+    return isVisibleCellule(getCelluleGrilleDemineur(grille, coord))
+
+def setVisibleGrilleDemineur(grille: list, coord: tuple, val: bool) -> None:
+    """
+    Change la valeur de la visibilité de la cellule et mets la valeur de val
+
+    :param grille: Grille dans laquelle se trouve celule qui nous interesse
+    :param coord: Coordoées de la cellule dans la grille
+    :param val:
+    :return:
+    """
+    setVisibleCellule(getCelluleGrilleDemineur(grille, coord), val)
+
+def contientMineGrilleDemineur(grille: list, coord: tuple) -> bool:
+    """
+    Renvoie un booléen reprérentant la présence ou non d'une mine dans une cellule
+
+    :param grille: Grille dans laquelle se trouve celule qui nous interesse
+    :param coord: Coordoées de la cellule dans la grille
+    :return: "True" si la cellule contient une mine, sinon "False"
+    """
+    return getContenuGrilleDemineur(grille, coord) == const.ID_MINE
