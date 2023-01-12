@@ -147,7 +147,6 @@ def getAnnotationCellule(cell: dict) -> str:
     if not type_cellule(cell):
         raise TypeError(f"getAnnotationCellule: Le paramètre {cell} n’est pas une cellule.")
 
-    print(cell)
     if const.ANNOTATION in cell.keys():
         return cell[const.ANNOTATION]
     else:

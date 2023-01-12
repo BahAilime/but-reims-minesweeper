@@ -278,3 +278,16 @@ def getAnnotationGrilleDemineur(grille: list, coord: tuple) -> str:
     :return: str (annotation)
     """
     return getAnnotationCellule(getCelluleGrilleDemineur(grille, coord))
+
+
+def getMinesRestantesGrilleDemineur(grille: list):
+    if not type_grille_demineur(grille):
+        raise ValueError("getMinesRestantesGrilleDemineur: le paramètre n’est pas une grille")
+
+    flag = 0
+    for ligne in grille:
+        for elt in ligne:
+            if getAnnotationCellule(elt) == const.FLAG:
+                flag += 1
+
+    return getNbMinesGrilleDemineur(grille) - flag
