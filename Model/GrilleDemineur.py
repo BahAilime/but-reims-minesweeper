@@ -93,7 +93,6 @@ def getNbColonnesGrilleDemineur(grille: list) -> int:
     :return: int (nombre de collonnes de la grille)
     """
     if not type_grille_demineur(grille):
-        print(grille)
         raise TypeError("getNbColonnesGrilleDemineur: Le paramètre n’est pas une grille")
 
     return len(grille[0])
@@ -107,7 +106,6 @@ def isCoordonneeCorrecte(grille: list, coord: tuple) -> bool:
     :return: booléen représentant l'existance ou non d'une cellule aux coordonées données en paramètre
     """
     if not type_grille_demineur(grille) or not type_coordonnee(coord):
-        print(coord)
         raise TypeError("isCoordonneeCorrecte: un des paramètres n’est pas du bon type")
 
     index_max_grille = (getNbLignesGrilleDemineur(grille)-1, getNbColonnesGrilleDemineur(grille)-1)
@@ -232,3 +230,20 @@ def placerMinesGrilleDemineur(grille: list, nb:int, coord: tuple):
             coord_mines.append(mine)
             cell = getCelluleGrilleDemineur(grille, mine)
             setContenuCellule(cell, const.ID_MINE)
+
+
+
+def compterMinesVoisinesGrilleDemineur(grille: list):
+    """
+    Change la les valeurs des cellules qui ne sont pas des mines par le nombre de mines dans leur voisinage
+
+    :param grille: Liste de liste elle meme composée de cellules
+    """
+    for i, ligne in enumerate(grille):
+        for j, elt in enumerate(ligne):
+            if getContenuCellule(elt) != const.ID_MINE:
+                nb_mine_voisin = 0
+                for coo in getCoordonneeVoisinsGrilleDemineur(grille, (i, j)):
+                    if getContenuCellule(getCelluleGrilleDemineur(grille, coo)) == const.ID_MINE:
+                        nb_mine_voisin += 1
+                setContenuCellule(elt, nb_mine_voisin)

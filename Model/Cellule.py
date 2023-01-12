@@ -90,7 +90,6 @@ def setContenuCellule(cell: dict, contenu: int) -> dict:
         raise TypeError(f"setContenuCellule: la valeur du contenu ({contenu}) n’est pas correcte.")
 
     elif not isContenuCorrect(contenu):
-        print(cell)
         raise ValueError(f"setContenuCellule: le contenu {contenu} n’est pas correct")
 
     cell["Contenu"] = contenu
@@ -125,5 +124,3 @@ def contientMineCellule(cell: dict) -> bool:
         raise TypeError("contientMineCellule: Le paramètre n’est pas une cellule.")
 
     return cell["Contenu"] == const.ID_MINE
-
-print(getContenuCellule(construireCellule(7, False)))
