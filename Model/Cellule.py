@@ -152,3 +152,16 @@ def getAnnotationCellule(cell: dict) -> str:
         return cell[const.ANNOTATION]
     else:
         return None
+
+
+def changeAnnotationCellule(cell: dict):
+    if not type_cellule(cell):
+        raise TypeError("changeAnnotationCellule: le paramètre n’est pas une cellule")
+
+    ordre = (None, const.FLAG, const.DOUTE)
+    cell[const.ANNOTATION] = ordre[(ordre.index(cell[const.ANNOTATION])+1)%len(ordre)]
+
+    # Détails:
+    #  - ordre.index(cell[const.ANNOTATION] récupère l'index de la position de l'annotation actuelle dans la séquence
+    #  - on ajoute 1 pour avoir le suivant
+    #  - %len(ordre) sert a éviter les IndexError en fin de séquence
