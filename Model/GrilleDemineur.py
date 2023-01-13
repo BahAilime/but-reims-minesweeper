@@ -291,3 +291,15 @@ def getMinesRestantesGrilleDemineur(grille: list):
                 flag += 1
 
     return getNbMinesGrilleDemineur(grille) - flag
+
+def gagneGrilleDemineur(grille: list):
+
+    if getMinesRestantesGrilleDemineur(grille) != 0:
+        return False
+
+    for ligne in grille:
+        for elt in ligne:
+            if (getContenuCellule(elt) == const.ID_MINE and isVisibleCellule(elt)) or (getContenuCellule(elt) != const.ID_MINE and not isVisibleCellule(elt)):
+                return False
+
+    return True
