@@ -280,7 +280,13 @@ def getAnnotationGrilleDemineur(grille: list, coord: tuple) -> str:
     return getAnnotationCellule(getCelluleGrilleDemineur(grille, coord))
 
 
-def getMinesRestantesGrilleDemineur(grille: list):
+def getMinesRestantesGrilleDemineur(grille: list) -> int:
+    """
+    Renvoie le nombre de mines restantes
+
+    :param grille: Liste de listes contenant des cellules
+    :return: int (nombre de mines restantes)
+    """
     if not type_grille_demineur(grille):
         raise ValueError("getMinesRestantesGrilleDemineur: le paramètre n’est pas une grille")
 
@@ -293,6 +299,12 @@ def getMinesRestantesGrilleDemineur(grille: list):
     return getNbMinesGrilleDemineur(grille) - flag
 
 def gagneGrilleDemineur(grille: list):
+    """
+    Renvoie un booléen qui est True si le joueur a gagné et False sinon
+
+    :param grille: Liste de listes contenant des cellules
+    :return:
+    """
 
     if getMinesRestantesGrilleDemineur(grille) != 0:
         return False
@@ -303,3 +315,18 @@ def gagneGrilleDemineur(grille: list):
                 return False
 
     return True
+
+def perduGrilleDemineur(grille: list):
+    """
+    Renvoie un booléen qui est True si le joueur a perdu et False sinon
+
+    :param grille: Liste de listes contenant des cellules
+    :return:
+    """
+
+    for ligne in grille:
+        for elt in ligne:
+            if getContenuCellule(elt) == const.ID_MINE and isVisibleCellule(elt):
+                return True
+
+    return False
